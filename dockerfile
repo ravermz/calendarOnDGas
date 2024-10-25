@@ -1,42 +1,32 @@
-# Etapa de construcción
-FROM node:18-alpine AS builder
-
-# Establecer el directorio de trabajo
-WORKDIR /app
-
-# Copiar archivos necesarios
-COPY package.json package-lock.json ./
-COPY prisma ./prisma/
-
-# Instalar dependencias
-RUN npm install
-
-# Generar el cliente de Prisma
-RUN npx prisma generate
-
-# Copiar el resto del código de la aplicación
-COPY . .
-
-# Construir la aplicación Next.js
-RUN npm run build
-
-# Etapa de producción
+# Usa una imagen oficial de Node.js como base
 FROM node:18-alpine
 
+# Instala curl, bash, dockerize y postgresql-client (para esperar a la base de datos y ejecutar psql)
+RUN apk add --no-cache curl bash postgresql-client && \
+  curl -L https://github.com/jwilder/dockerize/releases/download/v0.6.1/dockerize-linux-amd64-v0.6.1.tar.gz \
+  | tar -C /usr/local/bin -xz
+
+# Establece el directorio de trabajo
 WORKDIR /app
 
-# Copiar archivos desde la etapa de construcción
-COPY --from=builder /app/node_modules ./node_modules
-COPY --from=builder /app/.next ./.next
-COPY --from=builder /app/package.json ./package.json
+# Copia los package.json y package-lock.json
+COPY package*.json ./
 
-# Instalar 'wait-for' para manejar dependencias
-RUN apk add --no-cache bash curl
-ADD https://raw.githubusercontent.com/eficode/wait-for/v2.2.3/wait-for /wait-for
-RUN chmod +x /wait-for
+# Instala las dependencias
+RUN npm install
 
-# Exponer el puerto 3000
+# Copia el resto de la aplicación
+COPY . .
+
+# Copia el script de entrada y asegúrate de que tenga permisos de ejecución
+COPY ./docker-entrypoint.sh /docker-entrypoint.sh
+RUN chmod +x /docker-entrypoint.sh
+
+# Expone el puerto 3000
 EXPOSE 3000
 
-# Comando de inicio que espera a que la base de datos esté lista para darle con todo al proyecto
-CMD ["/wait-for", "db:5432", "--", "npm", "run", "start:migrate"]
+# Usa el script de entrada para la inicialización de Prisma y la ejecución de la aplicación
+ENTRYPOINT ["/docker-entrypoint.sh"]
+
+# Comando por defecto para desarrollo
+CMD ["npm", "run", "dev"]
