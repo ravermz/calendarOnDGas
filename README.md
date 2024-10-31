@@ -21,7 +21,23 @@ git clone https://github.com/tu-usuario/tu-repositorio.git
 cd tu-repositorio
 ```
 
+#### Configurar las variables de entorno
+
+Crea un archivo `.env` en la raíz del proyecto y agrega las siguientes variables:
+
+```env
+DATABASE_URL=tu_url_de_la_base_de_datos
+WEATHER_API_KEY=tu_api_key_del_clima
+```
+
+- `DATABASE_URL`: La URL de conexión a tu base de datos PostgreSQL.
+- `WEATHER_API_KEY`: Tu API key del servicio de clima (por ejemplo, WeatherAPI).
+
+Si estás usando una base de datos local con Docker, puedes usar la URL que se proporciona en el archivo `docker-compose.yml`.
+
+
 #### Correr el proyecto solo con DOCKER
+ES IMPORTANTE QUE TENGAS TU WEATHER_API_KEY en tu .env antes de seguir
 Si deseas usar Docker, con solo este comando montarás la base de datos y correra el proyecto, es decir, solo con docker y este comando podrás usar el proyecto:
 
 ```bash
@@ -41,20 +57,6 @@ o si prefieres usar yarn:
 ```bash
 yarn install
 ```
-
-#### Configurar las variables de entorno
-
-Crea un archivo `.env` en la raíz del proyecto y agrega las siguientes variables:
-
-```env
-DATABASE_URL=tu_url_de_la_base_de_datos
-WEATHER_API_KEY=tu_api_key_del_clima
-```
-
-- `DATABASE_URL`: La URL de conexión a tu base de datos PostgreSQL.
-- `WEATHER_API_KEY`: Tu API key del servicio de clima (por ejemplo, WeatherAPI).
-
-Si estás usando una base de datos local con Docker, puedes usar la URL que se proporciona en el archivo `docker-compose.yml`.
 
 #### Configurar la base de datos
 
