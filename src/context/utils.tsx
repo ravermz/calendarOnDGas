@@ -5,7 +5,7 @@ interface IProps {
 }
 
 /**
- * Función para combinar múltiples store providers en uno solo
+ * Función para combinar múltiples store providers en uno solo 🇲🇽
  *
  * @param {...FC<IProps>[]} components - Lista de store providers a combinar
  * @returns {FC<IProps>} Un nuevo componente que envuelve los store providers
@@ -19,13 +19,15 @@ interface IProps {
  */
 const combineComponents = (...components: FC<IProps>[]): FC<IProps> =>
   components.reduce(
-    (AccumulatedComponents, CurrentComponent): FC<IProps> =>
-      ({ children }: ComponentProps<FC<IProps>>): JSX.Element =>
-        (
-          <AccumulatedComponents>
-            <CurrentComponent>{children}</CurrentComponent>
-          </AccumulatedComponents>
-        ),
+    (AccumulatedComponents, CurrentComponent): FC<IProps> => {
+      const WrappedComponent = ({ children }: ComponentProps<FC<IProps>>): JSX.Element => (
+        <AccumulatedComponents>
+          <CurrentComponent>{children}</CurrentComponent>
+        </AccumulatedComponents>
+      )
+      WrappedComponent.displayName = `Combined(${AccumulatedComponents.displayName || 'Component'}, ${CurrentComponent.displayName || 'Component'})`
+      return WrappedComponent
+    },
     ({ children }) => <>{children}</>,
   )
 
@@ -37,7 +39,7 @@ const combineComponents = (...components: FC<IProps>[]): FC<IProps> =>
  * @property {Key} type - Tipo de la acción, basado en las claves de M
  * @property {M[Key]} [payload] - Payload de la acción, basado en el tipo asociado a la clave en M
  */
-type TActionMap<M extends { [index: string]: any }> = {
+type TActionMap<M extends { [index: string]: unknown }> = {
   [Key in keyof M]: M[Key] extends undefined
     ? {
         type: Key

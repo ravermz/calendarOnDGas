@@ -7,6 +7,7 @@ import { useEventContext } from '@/context/store/eventStore'
 import { EEventActions } from '@/context/reducer/eventReducer'
 
 import Calendar from '@/components/Calendar/Calendar'
+import Notification from '@/components/Notification/Notification'
 
 const Home: NextPage = () => {
   const { dispatch } = useEventContext()
@@ -28,6 +29,7 @@ const Home: NextPage = () => {
   return (
     <div className="container mx-auto p-4">
       <Calendar />
+      <Notification />
     </div>
   )
 }

@@ -9,6 +9,9 @@ RUN apk add --no-cache curl bash postgresql-client && \
 # Establece el directorio de trabajo
 WORKDIR /app
 
+ENV NODE_ENV=development
+ENV NEXT_TELEMETRY_DISABLED=1
+
 # Copia los package.json y package-lock.json
 COPY package*.json ./
 

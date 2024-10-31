@@ -1,3 +1,5 @@
+#!/bin/bash
+
 DB_HOST="db"
 DB_PORT="5432"
 DB_NAME="calendar_on_d_gas"

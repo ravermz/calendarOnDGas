@@ -8,6 +8,9 @@ CREATE TABLE "Event" (
     "endDate" TIMESTAMP(3) NOT NULL,
     "allDay" BOOLEAN NOT NULL DEFAULT false,
     "timezone" TEXT NOT NULL,
+    "temperature" DOUBLE PRECISION,
+    "condition" TEXT,
+    "icon" TEXT,
 
     CONSTRAINT "Event_pkey" PRIMARY KEY ("id")
 );

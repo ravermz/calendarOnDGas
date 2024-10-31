@@ -22,4 +22,8 @@ model Event {
   endDate     DateTime
   allDay      Boolean  @default(false)
   timezone    String
+
+  temperature Float?
+  condition   String?
+  icon        String?
 }
