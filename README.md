@@ -1,4 +1,4 @@
-# Calendario con Funcionalidades Clave
+# Calendario On D Gas
 
 Este proyecto es un calendario donde se pueden agregar, editar y eliminar eventos. Además, incluye funcionalidades adicionales como predicción del clima y selección automática de la zona horaria basada en la ciudad ingresada.
 
