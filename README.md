@@ -21,6 +21,13 @@ git clone https://github.com/tu-usuario/tu-repositorio.git
 cd tu-repositorio
 ```
 
+#### Correr el proyecto solo con DOCKER
+Si deseas usar Docker, con solo este comando montarás la base de datos y correra el proyecto, es decir, solo con docker y este comando podrás usar el proyecto:
+
+```bash
+docker-compose up -d
+```
+
 #### Instalar las dependencias
 
 Instala las dependencias necesarias:
@@ -51,15 +58,7 @@ Si estás usando una base de datos local con Docker, puedes usar la URL que se p
 
 #### Configurar la base de datos
 
-Si deseas usar Docker para la base de datos, puedes levantar el contenedor con:
-
-```bash
-docker-compose up -d
-```
-
-Esto iniciará una instancia de PostgreSQL en un contenedor Docker.
-
-Luego, aplica las migraciones de Prisma para crear las tablas necesarias:
+Para, aplica las migraciones de Prisma para crear las tablas necesarias:
 
 ```bash
 npx prisma migrate dev --name init
