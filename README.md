@@ -10,6 +10,10 @@ Este proyecto es un calendario donde se pueden agregar, editar y eliminar evento
 - npm o yarn instalado.
 - Docker (opcional, si deseas levantar la base de datos en un contenedor).
 
+
+### NOTAS
+- Cuando ejecutes lighthouse revisa que tienes todas tus extensiones apagadas, ya que afectan en la calificación del performance
+
 ### Pasos para correr el proyecto
 
 #### Clonar el repositorio
@@ -17,8 +21,8 @@ Este proyecto es un calendario donde se pueden agregar, editar y eliminar evento
 Primero, clona el repositorio y entra al directorio:
 
 ```bash
-git clone https://github.com/tu-usuario/tu-repositorio.git
-cd tu-repositorio
+git clone https://github.com/ravermz/calendarOnDGas.git
+cd calendarOnDGas
 ```
 
 #### Configurar las variables de entorno
@@ -41,8 +45,15 @@ ES IMPORTANTE QUE TENGAS TU WEATHER_API_KEY en tu .env antes de seguir
 Si deseas usar Docker, con solo este comando montarás la base de datos y correra el proyecto, es decir, solo con docker y este comando podrás usar el proyecto:
 
 ```bash
-docker-compose up -d
+docker-compose up --build
 ```
+
+Las siguientes veces ejecuta:
+```bash
+docker-compose up -d
+````
+
+## Ejecutar el proyecto de forma local
 
 #### Instalar las dependencias
 
