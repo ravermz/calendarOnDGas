@@ -1,5 +1,5 @@
 import { FC, useMemo, LegacyRef } from 'react'
-import { addDays, startOfWeek, format, isSameDay, isToday, setMinutes, setSeconds, setMilliseconds } from 'date-fns'
+import { addDays, startOfWeek, format, isSameDay, isToday, setMinutes, setSeconds, setMilliseconds, setHours } from 'date-fns'
 import { es } from 'date-fns/locale'
 import { Event } from '@prisma/client'
 import { useDrag, useDrop, DndProvider } from 'react-dnd'
@@ -124,10 +124,12 @@ const HourRow: FC<IHourRowProps> = ({ hour, day, eventsForDay, handleOnEventClic
     accept: 'event',
     drop: (item: Event) => {
       const newStartDate = setMilliseconds(setSeconds(setMinutes(new Date(day), 0), 0), 0)
-      newStartDate.setHours(hour)
+      const adjustedStartDate = setHours(newStartDate, hour)
       const duration = new Date(item.endDate).getTime() - new Date(item.startDate).getTime()
-      const newEndDate = new Date(newStartDate.getTime() + duration)
-      updateEventTime(item.id, newStartDate, newEndDate)
+      const tentativeEndDate = new Date(adjustedStartDate.getTime() + duration)
+      const endOfDay = setMilliseconds(setSeconds(setMinutes(setHours(new Date(day), 23), 59), 59), 999)
+      const newEndDate = tentativeEndDate > endOfDay ? endOfDay : tentativeEndDate
+      updateEventTime(item.id, adjustedStartDate, newEndDate)
     },
   })
 

@@ -10,8 +10,6 @@ import DayView from './DayView'
 import EventForm from '../Event/EventForm'
 import BaseButton from '@/components/Buttons/BaseButton'
 
-import { capitalizeFirstLetter } from '@/utils'
-
 type TCalendarView = 'month' | 'week' | 'day'
 
 /**
@@ -80,8 +78,8 @@ interface ICalendarHeaderProps {
 const CalendarHeader = ({ selectedDate, setView, handlePrev, handleNext }: ICalendarHeaderProps): JSX.Element => {
   return (
     <div className="flex items-center mb-4" role="navigation" aria-label="Navegación de calendario">
-      <h1 className="text-2xl font-bold flex-1" aria-live="polite">
-        {capitalizeFirstLetter(format(selectedDate, 'MMMM yyyy', { locale: es }))}
+      <h1 className="text-2xl font-bold flex-1 capitalize" aria-live="polite">
+        {format(selectedDate, 'MMMM yyyy', { locale: es })}
       </h1>
       <div className="flex justify-center mb-4 flex-1 gap-2" role="tablist" aria-label="Selector de vista de calendario">
         <BaseButton
