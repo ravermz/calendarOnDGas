@@ -17,8 +17,8 @@ Este proyecto es un calendario donde se pueden agregar, editar y eliminar evento
 Primero, clona el repositorio y entra al directorio:
 
 ```bash
-git clone https://github.com/tu-usuario/tu-repositorio.git
-cd tu-repositorio
+git clone https://github.com/ravermz/calendarOnDGas.git
+cd calendarOnDGas
 ```
 
 #### Configurar las variables de entorno
